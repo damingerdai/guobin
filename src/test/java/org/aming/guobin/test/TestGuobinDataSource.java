@@ -6,6 +6,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import javax.sql.DataSource;
+import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
@@ -29,5 +30,12 @@ public class TestGuobinDataSource {
     @Test
     public void testGetConnection() throws SQLException {
         Assert.assertNotNull(ds.getConnection());
+    }
+
+    @Test
+    public void testGetConnection2() throws SQLException {
+        Connection connection = ds.getConnection();
+        connection.close();
+        Assert.assertTrue("数据源已经关闭", connection.isClosed());
     }
 }
